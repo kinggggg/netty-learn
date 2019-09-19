@@ -22,6 +22,10 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
 
+        System.out.println(msg.getClass());
+        System.out.println(ctx.channel().remoteAddress());
+        Thread.sleep(8_000);
+
         if(msg instanceof HttpMessage) {
 
             HttpRequest httpRequest = (HttpRequest) msg;
@@ -40,7 +44,46 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
             response.headers().set(HttpHeaderNames.CONTENT_LENGTH, content.readableBytes());
 
             ctx.writeAndFlush(response);
+
+            // 响应完客户端请求后主动将连接关闭
+            ctx.channel().closeFuture();
         }
 
+    }
+
+    // 新的请求收到后，会按照下面1 2 3 4 5的顺序依次执行下面的方法
+    // 1
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelActive");
+        super.channelActive(ctx);
+    }
+
+    // 2
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelRegistered");
+        super.channelRegistered(ctx);
+    }
+
+    // 3
+    @Override
+    public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handlerAdded");
+        super.handlerAdded(ctx);
+    }
+
+    // 4
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelInactive");
+        super.channelInactive(ctx);
+    }
+
+    // 5
+    @Override
+    public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelUnregistered");
+        super.channelUnregistered(ctx);
     }
 }
