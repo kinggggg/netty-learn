@@ -52,6 +52,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
     // 新的请求收到后，会按照下面1 2 3 4 5的顺序依次执行下面的方法
     // 1
+    // Channel 处于活动状态（已经连接到它的远程节点）。它现在可以接收和发送数据了
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelActive");
@@ -66,13 +67,22 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     }
 
     // 3
+    // 当把 ChannelHandler 添加到 ChannelPipeline 中时被调用
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         System.out.println("handlerAdded");
         super.handlerAdded(ctx);
     }
 
+    // 当从 ChannelPipeline 中移除 ChannelHandler 时被调用
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("handlerRemoved");
+        super.handlerRemoved(ctx);
+    }
+
     // 4
+    // Channel 没有连接到远程节点
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelInactive");
@@ -84,5 +94,12 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         System.out.println("channelUnregistered");
         super.channelUnregistered(ctx);
+    }
+
+    // 当处理过程中在 ChannelPipeline 中有错误产生时被调用
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("exceptionCaught");
+        super.exceptionCaught(ctx, cause);
     }
 }
