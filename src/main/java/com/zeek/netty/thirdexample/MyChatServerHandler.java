@@ -50,6 +50,8 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
         // 当某个客户端断开连接后Netty会自动地将其从channelGroup中移除！！！！很神奇
         //channelGroup.remove(channel);
 
+        System.out.println(channelGroup.size());
+
     }
 
     // 连接处于活动状态
