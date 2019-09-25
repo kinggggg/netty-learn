@@ -16,7 +16,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
 
     // 保存所有已经与服务器端已经建立好的链接的客户端
-    private ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
@@ -24,9 +24,9 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
 
         channelGroup.forEach(ch -> {
             if(channel != ch) {
-                ch.writeAndFlush(channel.remoteAddress() + " 发送的消息：" + msg + "\\n");
+                ch.writeAndFlush(channel.remoteAddress() + " 发送的消息：" + msg + "\n");
             }else {
-                ch.writeAndFlush("【自己】" + msg + "\\n");
+                ch.writeAndFlush("【自己】" + msg + "\n");
             }
         });
     }
@@ -34,17 +34,19 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
+        System.out.println("handlerAdded");
 
         // 向所有的客户端发送消息
-        channelGroup.writeAndFlush("【服务器】- " + channel.remoteAddress() + " 加入\\n");
+        channelGroup.writeAndFlush("【服务器】- " + channel.remoteAddress() + " 加入\n");
         channelGroup.add(channel);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
+        System.out.println("handlerRemoved");
 
-        channelGroup.writeAndFlush("【服务器】- " + channel.remoteAddress() + " 离开\\n");
+        channelGroup.writeAndFlush("【服务器】- " + channel.remoteAddress() + " 离开\n");
         // 当某个客户端断开连接后Netty会自动地将其从channelGroup中移除！！！！很神奇
         //channelGroup.remove(channel);
 
@@ -54,12 +56,14 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
+        System.out.println("channelActive");
         System.out.println(channel.remoteAddress() + " 上线");
     }
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
+        System.out.println("channelInactive");
         System.out.println(channel.remoteAddress() + " 下线");
     }
 
