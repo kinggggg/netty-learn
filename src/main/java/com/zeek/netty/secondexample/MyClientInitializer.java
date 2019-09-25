@@ -10,12 +10,12 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
 
 /**
- * @ClassName MyServerInitializer
+ * @ClassName MyClientInitializer
  * @Description
- * @Date 2019/9/25 10:49 AM
+ * @Date 2019/9/25 2:05 PM
  * @Version v1.0
  **/
-public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
+public class MyClientInitializer extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
@@ -25,6 +25,7 @@ public class MyServerInitializer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new LengthFieldPrepender(4));
         pipeline.addLast(new StringDecoder(CharsetUtil.UTF_8));
         pipeline.addLast(new StringEncoder(CharsetUtil.UTF_8));
-        pipeline.addLast(new MyServerHandler());
+        pipeline.addLast(new MyClientHandler());
     }
+
 }

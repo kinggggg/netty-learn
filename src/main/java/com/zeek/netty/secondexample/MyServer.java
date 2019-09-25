@@ -9,7 +9,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 /**
  * @ClassName MyServer
  * @Description
- * @Author liweibo
  * @Date 2019/9/20 7:55 PM
  * @Version v1.0
  **/
@@ -25,7 +24,7 @@ public class MyServer {
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(workerGroup, bossGroup).channel(NioServerSocketChannel.class)
-                    .childHandler(null);
+                    .childHandler(new MyServerInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
             channelFuture.channel().closeFuture().sync();
