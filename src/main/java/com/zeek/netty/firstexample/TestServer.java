@@ -26,6 +26,7 @@ public class TestServer {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                     // TestServerInitializer当连接建立完成后，会自动调用TestServerInitializer中的initChannel方法
+                    // 通过childHandler添加的内容是供workerGroup使用的，通过handler方法添加的内容是供bossGroup使用的
                     .childHandler(new TestServerInitializer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
