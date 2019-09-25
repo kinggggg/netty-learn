@@ -47,7 +47,7 @@ public class MyChatServerHandler extends SimpleChannelInboundHandler<String> {
         System.out.println("handlerRemoved");
 
         channelGroup.writeAndFlush("【服务器】- " + channel.remoteAddress() + " 离开\n");
-        // 当某个客户端断开连接后Netty会自动地将其从channelGroup中移除！！！！很神奇
+        // 当某个客户端断开连接后Netty会自动地将其从channelGroup中移除！！！！很神奇。当然也可以显示进行remove
         //channelGroup.remove(channel);
 
         System.out.println(channelGroup.size());
