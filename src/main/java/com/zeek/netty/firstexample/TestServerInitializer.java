@@ -8,7 +8,6 @@ import io.netty.handler.codec.http.HttpServerCodec;
 /**
  * @ClassName TestServerInitializer
  * @Description
- * @Author liweibo
  * @Date 2019/9/17 2:07 PM
  * @Version v1.0
  **/

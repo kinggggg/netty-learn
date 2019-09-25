@@ -9,7 +9,6 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 /**
  * @ClassName TestServer
  * @Description 虽然程序比较简短，但是大多数的netty流程都是这样的一个流程
- * @Author liweibo
  * @Date 2019/9/17 12:34 PM
  * @Version v1.0
  **/
