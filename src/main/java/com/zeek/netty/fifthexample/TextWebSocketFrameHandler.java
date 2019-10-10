@@ -18,6 +18,7 @@ public class TextWebSocketFrameHandler extends SimpleChannelInboundHandler<TextW
     protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
         System.out.println("收到消息: " + msg.text());
 
+        //由于这个例子是WebSocket的例子，当服务器端向客户端发送消息的时候要发送正确的类型，这里使用的是TextWebSocketFrame类型的消息
         ctx.channel().writeAndFlush(new TextWebSocketFrame("服务器时间: " + LocalDateTime.now()));
     }
 
