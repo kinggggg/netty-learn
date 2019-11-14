@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    // 用于生成grpc代码的gradle提供的插件
     id 'com.google.protobuf' version '0.8.8'
 }
 
@@ -28,6 +29,9 @@ dependencies {
     implementation 'io.grpc:grpc-stub:1.25.0'
 }
 
+
+// 下面的配置方式是从 gradle提供的生成grpc代码的插件官方网站提供的信息配置的，插件的官方网站
+// 是https://github.com/google/protobuf-gradle-plugin
 protobuf {
     protoc {
         artifact = "com.google.protobuf:protoc:3.10.0"
