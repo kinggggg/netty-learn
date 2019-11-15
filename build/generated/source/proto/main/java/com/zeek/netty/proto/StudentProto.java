@@ -42,7 +42,7 @@ public final class StudentProto {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
+    java.lang.String[] descriptorData = {
       "\n\rStudent.proto\022\024com.zeek.netty.proto\"\035\n" +
       "\tMyRequest\022\020\n\010username\030\001 \001(\t\"\036\n\nMyRespon" +
       "se\022\020\n\010realname\030\001 \001(\t\"\035\n\016StudentRequest\022\013" +
@@ -65,25 +65,25 @@ public final class StudentProto {
     internal_static_com_zeek_netty_proto_MyRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_zeek_netty_proto_MyRequest_descriptor,
-        new String[] { "Username", });
+        new java.lang.String[] { "Username", });
     internal_static_com_zeek_netty_proto_MyResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_zeek_netty_proto_MyResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_zeek_netty_proto_MyResponse_descriptor,
-        new String[] { "Realname", });
+        new java.lang.String[] { "Realname", });
     internal_static_com_zeek_netty_proto_StudentRequest_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_zeek_netty_proto_StudentRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_zeek_netty_proto_StudentRequest_descriptor,
-        new String[] { "Age", });
+        new java.lang.String[] { "Age", });
     internal_static_com_zeek_netty_proto_StudentResponse_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_com_zeek_netty_proto_StudentResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_com_zeek_netty_proto_StudentResponse_descriptor,
-        new String[] { "Name", "Age", "City", });
+        new java.lang.String[] { "Name", "Age", "City", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
