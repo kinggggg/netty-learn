@@ -8,15 +8,13 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * NioTest4 
- * 放置进去的数据是什么杨的类型，获取的时候也必须是对应的类型
- * 获取的顺序必须一样
+ * NioTest7
  */
-public class NioTest4 {
+public class NioTest7 {
 
     public static void main(String[] args) throws IOException {
-
-        ByteBuffer byteBuf = ByteBuffer.allocate(512);
+        
+        ByteBuffer byteBuf = ByteBuffer.allocateDirect(512);
 
         FileInputStream inputStream = new FileInputStream("input.txt");
         FileOutputStream outputStream = new FileOutputStream("output.txt");
@@ -39,17 +37,6 @@ public class NioTest4 {
         outputStream.close();
         inputChannel.close();
         inputStream.close();
-        
-        ByteBuffer byteBuffer = ByteBuffer.allocate(512);
-        byteBuffer.putInt(10);
-        byteBuffer.putChar('a');
-        byteBuffer.putLong(123123L);
-        
-        byteBuffer.flip();
-
-        System.out.println(byteBuffer.getInt());
-        System.out.println(byteBuffer.getChar());
-        System.out.println(byteBuffer.getLong());
 
     }
 }
