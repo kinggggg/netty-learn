@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 /**
  * NioTest4 
  * 放置进去的数据是什么杨的类型，获取的时候也必须是对应的类型
+ * 获取的顺序必须一样
  */
 public class NioTest4 {
 
