@@ -1,0 +1,46 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest8",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest8",
+            "projectName": "netty-learn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest7",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest7",
+            "projectName": "netty-learn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest6",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest6",
+            "projectName": "netty-learn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest5",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest5",
+            "projectName": "netty-learn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest4",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest4",
+            "projectName": "netty-learn"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - NioTest3",
+            "request": "launch",
+            "mainClass": "com.zeek.netty.nio.NioTest3",
+            "projectName": "netty-learn"
+        }
+    ]
+}
