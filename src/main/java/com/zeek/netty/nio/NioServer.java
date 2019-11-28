@@ -98,6 +98,8 @@ public class NioServer {
                     }
                 });
                 // 我感觉：这里调用clear方法不安全，应该只删除当前的selectionKey
+                // 会不会存在这样的一种情况：第一个客户端的请求正在服务器端执行，执行到了Set<SelectionKey> selectionKeys = selector.selectedKeys();一行
+                // 此时第二个请求也执行到了这一样；第一个请求执行比较快很快执行到了下面的代码进行clear清除selectionKeys，而第二个请求正在处理，这样的话会导致问题吧？
                 selectionKeys.clear();
 
                 System.out.println("1111>selectionKeys: " + selectionKeys);
