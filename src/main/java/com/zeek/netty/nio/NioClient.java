@@ -22,12 +22,8 @@ import java.util.concurrent.Executors;
  * @Version v1.0
  **/
 public class NioClient {
-
     public static void main(String[] args) throws Exception{
-
         try {
-
-
             SocketChannel socketChannel = SocketChannel.open();
             socketChannel.configureBlocking(false);
 
@@ -57,30 +53,36 @@ public class NioClient {
                                 while (true) {
                                     try {
                                         writeBuffer.clear();
-                                        InputStream in;
                                         InputStreamReader input = new InputStreamReader(System.in);
                                         BufferedReader br = new BufferedReader(input);
 
                                         String sendMessage = br.readLine();
                                         writeBuffer.put(sendMessage.getBytes());
-                                        writeBuffer.clear();
+                                        writeBuffer.flip();
                                         client.write(writeBuffer);
                                     } catch (Exception e) {
-
+                                        e.printStackTrace();
                                     }
                                 }
                             });
                         }
+                        client.register(selector, SelectionKey.OP_READ);
+                    }else if(selectionKey.isReadable()) {
+                        SocketChannel client = (SocketChannel)selectionKey.channel();
+
+                        ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+
+                        int count = client.read(readBuffer);
+                        if(count > 0) {
+                            String receiveMessage = new String(readBuffer.array(), 0, count);
+                            System.out.println(receiveMessage);
+                        }
                     }
                 }
-
                 keySet.clear();
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }

@@ -25,7 +25,6 @@ public class NioServer {
 
     public static void main(String[] args) throws Exception{
 
-
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.configureBlocking(false);
         ServerSocket serverSocket = serverSocketChannel.socket();
