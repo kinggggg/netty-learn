@@ -14,7 +14,7 @@ public class OldClient {
     public static void main(String[] args) throws Exception{
         Socket socket = new Socket("localhost", 8899);
 
-        String fileName = "/Users/weibo_li/Desktop/46-60/50_零拷贝实例深度剖析.mp4" ;
+        String fileName = "/Users/weibo_li/Desktop/46-60/60_Netty的自适应缓冲区分配策略与堆外内存创建方式.mp4" ;
         InputStream inputStream = new FileInputStream(fileName);
 
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
