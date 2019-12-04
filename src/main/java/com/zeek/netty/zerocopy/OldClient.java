@@ -3,6 +3,7 @@ package com.zeek.netty.zerocopy;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.Socket;
 
 
@@ -18,6 +19,8 @@ public class OldClient {
         InputStream inputStream = new FileInputStream(fileName);
 
         DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+        // 使用OutputStream也可以
+        // OutputStream outputStream = socket.getOutputStream();
 
         long startTime = System.currentTimeMillis();
 
@@ -28,6 +31,7 @@ public class OldClient {
         while ((readCount = inputStream.read(buffer)) >=0) {
             total += readCount;
             dataOutputStream.write(buffer);
+            // outputStream.write(buffer);
         }
 
         System.out.println("发送字节数: " + total + ", 耗时： " + (System.currentTimeMillis() - startTime));
