@@ -1,18 +1,15 @@
 package com.zeek.netty.zerocopy;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
-
-
 /**
  * NewNioServer
  */
-public class NewNioServer {
+public class NewIOServer {
 
     public static void main(String[] args) throws Exception{
         InetSocketAddress inetAddress = new InetSocketAddress(8899);
