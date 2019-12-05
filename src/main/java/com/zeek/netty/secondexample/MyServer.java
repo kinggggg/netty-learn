@@ -18,7 +18,7 @@ public class MyServer {
 
         /**
          * 只是接受连接；死循环；
-         * 主要是做一些初始化的工作，根据传递给构造函数的数值创建相应数量的EventExecutor
+         * 主要是做一些初始化的工作，根据传递给构造函数的数值创建相应数量的EventExecutor；若没有传递值的话，在默认的情况为CPU数量（若操作系统支持CPU超频的话，CPU数量再乘以2）的2倍
          * 而EventExecutor的作用是：
          *  The {@link EventExecutor} is a special {@link EventExecutorGroup} which comes
          *  with some handy methods to see if a {@link Thread} is executed in a event loop.
