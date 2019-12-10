@@ -33,6 +33,7 @@ public class MyServer {
 
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
+            // 主要做一些赋值性的操作。其中.channel方法根据传递的参数创建了一个工厂。当调用下面的bind方法时，是通过该工厂创建出NioServerSocketChannel类的实例
             serverBootstrap.group(workerGroup, bossGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new MyServerInitializer());
 
