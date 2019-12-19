@@ -8,6 +8,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * NioTest7
+ * 直接内存缓冲区示例程序
  */
 public class NioTest7 {
 
