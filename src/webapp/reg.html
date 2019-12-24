@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket客户端</title>
+</head>
+<body>
+    <input type="text" id="reg" placeholder="reg">
+    <input type="text" id="input" placeholder="input">
+    <input type="button" value="start" onclick="start()">
+</body>
+
+
+
+<script type="text/javascript">
+    console.log("start");
+
+
+    function start() {
+
+        var regex = document.getElementById("reg").value;
+        var input = document.getElementById("input").value;
+
+        var result = input.match(regex);
+
+        if (null==result || 0==result.length) {
+            console.log("（没有匹配）");
+            return;
+        }
+        var strResult = "共找到 " + result.length + " 处匹配";
+        console.log(strResult);
+
+        var r = "" ;
+        for (var i=0;i < result.length;++i)
+            r = r + result[i] ;
+        console.log(r);
+
+
+        console.log("start");
+
+
+
+    }
+
+
+</script>
+
+</html>
+
+
