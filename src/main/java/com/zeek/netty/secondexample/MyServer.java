@@ -37,10 +37,15 @@ public class MyServer {
             serverBootstrap.group(workerGroup, bossGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new MyServerInitializer());
 
+            // sync方法确保『初始化』和『注册』操作均已经完成；换句话说调用sync后，程序会等待『初始化』和『注册』操作的完成，等这两个操作完成后，程序才继续向下执行
+            // 如果不调用sync方法的话，调用了bind方法后会立刻返回，进行马上执行后边的代码，但是这就不能保证『初始化』和『注册』操作已经完成，程序有可能不能正常执行，因此sync方法必须调用
             ChannelFuture channelFuture = serverBootstrap.bind(8899).sync();
+            // 在实际的运行过程中，当服务端启动的时候，程序会停到下面一行的代码上；
+            // 下面的sync方法的作用是当服务器关闭的时候，通过通过同步（和上面的sync方法效果一样，目的也是等待服务器完全关闭，在等待服务器关闭的过程中，程度也会停在这一行代码上）
             channelFuture.channel().closeFuture().sync();
 
         }finally {
+            // 当服务器关闭完成后，下面的两行代码用于释放相关的服务器的资源
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
