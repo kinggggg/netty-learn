@@ -18,12 +18,15 @@ public class MyClientHandler extends SimpleChannelInboundHandler<Long> {
     protected void channelRead0(ChannelHandlerContext ctx, Long msg) throws Exception {
         System.out.println(ctx.channel().remoteAddress());
         System.out.println("client output " + msg);
-        ctx.writeAndFlush("from client: " + LocalDate.now());
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
+        // 如果传递的是字符串形式的"123456L"将不会进入到编码器 MyLongToByteEncoder，只进入到 MyStringToByteEncoder
+        ctx.writeAndFlush(123456L);
+
+        // 如果传递的是字符串形式的123456L将不会进入到编码器 MyStringToByteEncoder，只进入到 MyLongToByteEncoder
         ctx.writeAndFlush("123456L");
     }
 

@@ -27,7 +27,6 @@ public class MyServer {
             channelFuture.channel().closeFuture().sync();
 
         }finally {
-            // 当服务器关闭完成后，下面的两行代码用于释放相关的服务器的资源
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
