@@ -10,6 +10,8 @@ import io.netty.handler.codec.MessageToByteEncoder;
         protected void encode(ChannelHandlerContext ctx, Long msg, ByteBuf out) throws Exception {
             System.out.println("encode invoked");
 
+            System.out.println(msg);
+
             out.writeLong(msg);
         }
 }
