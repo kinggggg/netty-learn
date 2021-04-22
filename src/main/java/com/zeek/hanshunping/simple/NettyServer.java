@@ -9,6 +9,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.NettyRuntime;
 
 /**
  * @ClassName NettyServer
@@ -21,11 +22,15 @@ public class NettyServer {
 
     public static void main(String[] args) throws InterruptedException {
 
+        // cpu核数 目前mac本机上为12核
+        System.out.println(NettyRuntime.availableProcessors());
+
         // 创建BossGroup 和 WorkerGroup
         // 说明
         // 1. 创建两个线程组 bossGroup 和 workerGroup
         // 2. bossGroup 只处理连接请求, 真正的和客户端业务处理, 会交给workerGroup完成
         // 3. 两个都是无限循环
+        // 4. bossGroup 和 workerGroup 含有的子线程(NioEventLoop)的个数默认为 cpu核数*2
         EventLoopGroup boosGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
