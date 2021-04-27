@@ -28,8 +28,21 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         // 比如这里我们有一个非常耗时长的业务 -> 异步执行 -> 提交该channel 对应的
         // NIOEventLoop 的 taskQueue中
-        Thread.sleep(10 * 1000);
-        ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~喵2", CharsetUtil.UTF_8));
+
+
+        // 解决方案1 用户程序自定义的普通任务
+
+        ctx.channel().eventLoop().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(10 * 1000);
+                    ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~喵2", CharsetUtil.UTF_8));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         System.out.println("go on ...");
 
