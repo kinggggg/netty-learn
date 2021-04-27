@@ -26,18 +26,25 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     // 2. Object msg: 就是客户端发送的数据 默认Object
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("服务器读取线程 " + Thread.currentThread().getName());
-        System.out.println("server ctx = " + ctx);
+        // 比如这里我们有一个非常耗时长的业务 -> 异步执行 -> 提交该channel 对应的
+        // NIOEventLoop 的 taskQueue中
+        Thread.sleep(10 * 1000);
+        ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~喵2", CharsetUtil.UTF_8));
 
-        System.out.println("看看channel 和 pipeline的关系");
-        Channel channel = ctx.channel();
-        ChannelPipeline pipeline = channel.pipeline(); // 本质是一个双向链表, 出站入站
+        System.out.println("go on ...");
 
-        // 将 msg 转换成 ByteBuf
-        // ByteBuf 是 Netty 提供的, 不是NIO的 ByteBuffer
-        ByteBuf buf = (ByteBuf) msg;
-        System.out.println("客户端发送消息是:" + buf.toString(CharsetUtil.UTF_8));
-        System.out.println("客户端地址:" + channel.remoteAddress());
+//        System.out.println("服务器读取线程 " + Thread.currentThread().getName());
+//        System.out.println("server ctx = " + ctx);
+//
+//        System.out.println("看看channel 和 pipeline的关系");
+//        Channel channel = ctx.channel();
+//        ChannelPipeline pipeline = channel.pipeline(); // 本质是一个双向链表, 出站入站
+//
+//        // 将 msg 转换成 ByteBuf
+//        // ByteBuf 是 Netty 提供的, 不是NIO的 ByteBuffer
+//        ByteBuf buf = (ByteBuf) msg;
+//        System.out.println("客户端发送消息是:" + buf.toString(CharsetUtil.UTF_8));
+//        System.out.println("客户端地址:" + channel.remoteAddress());
     }
 
     // 数据读取完毕
@@ -46,7 +53,7 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
         // writeAndFlush = write + flush
         // 将数据写入缓存, 并刷新
         // 一般讲, 我们对发送的数据进行编码
-        ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~喵", CharsetUtil.UTF_8));
+        ctx.writeAndFlush(Unpooled.copiedBuffer("hello, 客户端~喵1", CharsetUtil.UTF_8));
     }
 
     // 处理异常, 一般是需要关闭通道
