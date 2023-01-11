@@ -47,6 +47,13 @@ public class NettyServer {
                         // 给pipeline设置处理器
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
+                            // 场景:
+                            // 例如在推送系统的业务线程里面，根据用户的标识，找到对应的 Channel 引用，然后调用 Write 类方法向该用户推送消息，
+                            // 就会进入到这种场景。最终的 Write 会提交到任务队列中后被异步消费
+                            // 解决思路:
+                            // 可以使用一个集合管理SocketChannel, 在推送消息时, 可以将业务加入到各个channel对应的NIOEventLoop的taskQueue或者scheduleTaskQueue中
+                            System.out.println("k客户socketchannel hashcode=" + ch.hashCode());
+
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new NettyServerHandler());
                         }
