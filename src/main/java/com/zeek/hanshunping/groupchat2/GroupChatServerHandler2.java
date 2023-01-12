@@ -60,6 +60,9 @@ public class GroupChatServerHandler2 extends SimpleChannelInboundHandler<String>
 
     /**
      * 断开连接, 将 xx 客户离开信息推送给当前在线的客户
+     *
+     * 有了这个方法后为什么还需要心跳检测(后续的课程中有讲到)呢?
+     * 这是因为在手机强制关机或者手机切换为飞行模式时对服务端来说有可能是无感知的!因此需要心跳检测机制来探测客户端的连接状态
      */
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
